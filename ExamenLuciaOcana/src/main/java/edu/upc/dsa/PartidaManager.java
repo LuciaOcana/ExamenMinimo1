@@ -1,9 +1,10 @@
-package edu.upc.dsa.util;
+package edu.upc.dsa;
 
 import edu.upc.dsa.models.Partida;
 import java.util.List;
 public interface PartidaManager {
-    public Partida addPartida(int idU, int level, int puntos, String fechaI, String fechaF);
+    public Partida addPartida(int idU, String fecha);
+
     public Partida addPartida(Partida p);
     public Partida getPartida(int id);
     public List<Partida> findAllPartidas();

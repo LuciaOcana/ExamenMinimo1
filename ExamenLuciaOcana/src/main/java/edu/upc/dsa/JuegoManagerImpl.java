@@ -1,11 +1,10 @@
-package edu.upc.dsa.util;
+package edu.upc.dsa;
 
 import edu.upc.dsa.models.Game;
 
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 public class JuegoManagerImpl implements JuegoManager{
     private static JuegoManager instance;

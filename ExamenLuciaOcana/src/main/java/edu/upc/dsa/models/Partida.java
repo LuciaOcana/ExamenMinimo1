@@ -1,30 +1,31 @@
 package edu.upc.dsa.models;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Partida {
     int idPartida;
     AtomicInteger nextID = new AtomicInteger(); //Asignamos un id a la partida empezada.
     int idUsuario;
+    //El primer nivel siempre empezará siendo 1
     int nivelActual;
     int puntosPartida;
-    String fechaInicioPartida;
     String fechaCambioNivel;
     int ultimoNivel;
+    List<String> date;
+    int endPartida=0;
 
     //Constructores
     //----------------------------------------------------
     public Partida(){
         this.idPartida=nextID.incrementAndGet();
     }
-    public Partida(int idUser, int nivel, int puntos, String fechaInicio, String fechaNextLevel){
+    public Partida(int idUser,String fecha){
         this();
         this.idPartida=nextID.incrementAndGet();
         this.idUsuario=idUser;
-        this.nivelActual=nivel;
-        this.puntosPartida=puntos;
-        this.fechaInicioPartida=fechaInicio;
-        this.fechaCambioNivel=fechaNextLevel;
+        this.nivelActual=1;
+        date.add(fecha);
     }
     //----------------------------------------------------
 
@@ -40,9 +41,6 @@ public class Partida {
     public int GetPuntosPartida(){
         return this.puntosPartida;
     }
-    public String GetFechaInicioPartida(){
-        return this.fechaInicioPartida;
-    }
     public String GetFechaCambioNivel(){
         return this.fechaCambioNivel;
     }
@@ -56,9 +54,6 @@ public class Partida {
     public void SetPuntosPartida(int puntos){
         this.puntosPartida=puntos;
     }
-    public void SetFechaInicioPartida(String fechaI){
-        this.fechaInicioPartida=fechaI;
-    }
     public void SetFechaCambioNivel(String fechaNL){
         this.fechaCambioNivel=fechaNL;
     }
@@ -66,15 +61,23 @@ public class Partida {
         this.ultimoNivel=ultimoLevel;
     }
     //Metodo para avanzar nivel
-    public void avanzarNivel() {
-        nivelActual++;
+    public void avanzarNivel(int idU,String dateNextLevel, int points) {
 
-        if (nivelActual == 1) {
-            // Sumar 50 puntos al avanzar al primer nivel
-            puntosPartida += 50;
-        } else if (nivelActual == ultimoNivel) {
-            // Sumar 100 puntos al llegar al último nivel
-            puntosPartida += 100;
+        if (idU==idUsuario) {
+            date.add(dateNextLevel);
+            if (nivelActual == 1) {
+                // Sumar 50 puntos al avanzar al primer nivel
+                puntosPartida += 50;
+            } else if (nivelActual == ultimoNivel) {
+                // Sumar 100 puntos al llegar al último nivel
+                puntosPartida =puntosPartida+points+ 100;
+                //Final de la partida
+                endPartida=1;
+            } else if (nivelActual != ultimoNivel && endPartida==0) {
+                puntosPartida = puntosPartida + points;
+                //Si el nivel es diferente al ultimo entonces sumamos +1 al nivel --> nivel siguiente
+                nivelActual++;
+            }
         }
     }
 

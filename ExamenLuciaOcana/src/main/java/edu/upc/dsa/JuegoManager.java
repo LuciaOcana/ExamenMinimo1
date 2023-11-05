@@ -1,4 +1,4 @@
-package edu.upc.dsa.util;
+package edu.upc.dsa;
 
 import edu.upc.dsa.models.Game;
 

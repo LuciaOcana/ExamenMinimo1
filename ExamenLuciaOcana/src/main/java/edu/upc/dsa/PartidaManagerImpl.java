@@ -1,12 +1,11 @@
-package edu.upc.dsa.util;
+package edu.upc.dsa;
 
-import edu.upc.dsa.models.Game;
 import edu.upc.dsa.models.Partida;
 
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
+
 public class PartidaManagerImpl implements PartidaManager {
     private static PartidaManager instance;
     protected List<Partida> partidas;
@@ -23,8 +22,8 @@ public class PartidaManagerImpl implements PartidaManager {
 
 
     @Override
-    public Partida addPartida(int idU, int level, int puntos, String fechaI, String fechaF) {
-        return this.addPartida(new Partida(idU, level, puntos,fechaI,fechaF));
+    public Partida addPartida(int idU, String fecha) {
+        return this.addPartida(new Partida(idU,fecha));
     }
 
     @Override
@@ -76,7 +75,6 @@ public class PartidaManagerImpl implements PartidaManager {
             //Set description y set levels
             ps.SetPuntosPartida(p.GetPuntosPartida());
             ps.SetPuntosPartida(p.GetPuntosPartida());
-            ps.SetFechaInicioPartida(p.GetFechaInicioPartida());
             ps.SetFechaCambioNivel(p.GetFechaCambioNivel());
 
             logger.info(ps+" updated ");
